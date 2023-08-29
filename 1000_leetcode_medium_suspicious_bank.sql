@@ -2,6 +2,8 @@
 -- A bank account is suspicious if the total income exceeds the max_income for this account for two or more consecutive months. 
 -- The total income of an account in some month is the sum of all its deposits in that month (i.e., transactions of the type 'Creditor').
 -- Write an SQL query to report the IDs of all suspicious bank accounts.
+-- This problem solved in POstgreSQL
+
 -- Create Accounts table if not exists
 CREATE TABLE IF NOT EXISTS Accounts (
     account_id SERIAL PRIMARY KEY,
@@ -46,7 +48,11 @@ INSERT INTO Transactions (transaction_id, account_id, type, amount, day) VALUES 
 INSERT INTO Transactions (transaction_id, account_id, type, amount, day) VALUES (7, 3, 'creditor', 90900, '2021-06-14 11:23:07');
 commit;
 
----
+
+select * from Transactions;
+select * from Accounts;
+
+--- SQL query to report the IDs of all suspicious bank accounts
 select
 	r.account_id
 from
@@ -80,10 +86,6 @@ from
 where
 	EXTRACT(month from r.next_year_month::DATE) - EXTRACT(month from r.year_month::DATE) = 1;
 
-
-
-select * from Transactions;
-select * from Accounts;
 
 
 
